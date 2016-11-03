@@ -39,10 +39,10 @@ app.use( (request, response, next) => {
 if ( app.get( 'env' ) === 'development' ) {
   app.use( (error, request, response, next) => {
     response.status(error.status || 500)
-    response.render('error', {
-      message: error.message,
-      error: error
-    })
+    .json({
+            status: 'error',
+            message: error
+          })
   })
 }
 
@@ -50,10 +50,10 @@ if ( app.get( 'env' ) === 'development' ) {
 // no stacktraces leaked to user
 app.use( ( error, request, response, next ) => {
   response.status( error.status || 500 )
-  response.render( 'error', {
-    message: error.message,
-    error: {}
-  })
+  .json({
+          status: 'error',
+          message: error
+        })
 })
 
 
