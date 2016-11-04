@@ -11,7 +11,12 @@ const Test_Suite = {
 
   handle: ( request, response, next ) => {
     knex.select().from('transaction')
-    .then( data => response.send(data))
+    .then( data => response.status(200)
+                    .json({
+                            status: 'success!',
+                            data: data,
+                            message: "Here be your transactions B."
+                          }))
     .catch( error => next(error))
   },
 
